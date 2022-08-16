@@ -1,12 +1,15 @@
-This is an assignment project for InfoTrack
+<h1>This is an assignment project for InfoTrack<h1>
 
 ![image](https://user-images.githubusercontent.com/22886122/184878695-7d464b21-827b-44d2-8e0c-e26022a85c35.png)
 
-Web Page Setup
-1-Run  "npm install" command to required packages
-2- "ng serve" to build and publish web page
-3- open "http://localhost:4200/" from your browser
+<h2>Web Page Setup</h2>
+<p>1-Run  "npm install" command to required packages
+<p>2- "ng serve" to build and publish web page
+<p>3- open "http://localhost:4200/" from your browser
 
 
-BackEnd => Asp.NET core 6
-FrontEnd => Angular
+<h2>BackEnd</h2> 
+<p>Asp.NET core 6
+
+  <h2>FrontEnd</h2>
+<p>   Angular
