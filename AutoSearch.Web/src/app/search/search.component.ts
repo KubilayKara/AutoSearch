@@ -13,18 +13,25 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  _response: ResponseDto | undefined;
-  search(text: string) {
 
-    console.log(`Search`);
-    console.log(text);
+  results: any[] = [];
+  isSearched: boolean = false;
+
+  search(text: string) {
+    //console.log(`Search`);
+    //console.log(text);
 
     let res = this.getResult(text).subscribe((data: ResponseDto) => {
-      this._response = { ...data }
+      let _response: ResponseDto | undefined;
+      _response = { ...data }
       console.log("this._response-1");
-      console.log(this._response);
-      if (this._response.isSuccess)
-        alert(this._response.result);
+      console.log(_response);
+      
+      if (_response.isSuccess) {
+        //alert(_response.result);
+        this.isSearched =true;
+        this.results = _response.result as any[];
+      }
     });
   }
   getResult(text: string) {
@@ -36,5 +43,6 @@ export class SearchComponent implements OnInit {
     return resp;
   }
 }
+
 
 

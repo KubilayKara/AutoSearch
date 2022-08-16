@@ -51,7 +51,7 @@ namespace AutoSearch.Api.Search.Controllers
             var links = Regex.Matches(resp, settings.Regex).Select(r => r.Value).ToList();
             var result = links == null ? new List<int>() :
                 links.Where(l => l.Contains(settings.DesiredUrl, StringComparison.OrdinalIgnoreCase))
-                .Select(l => links.IndexOf(l))
+                .Select(l => links.IndexOf(l)+1)
                 .Distinct()
                 .ToList();
             return result;
