@@ -2,16 +2,20 @@
   <div>
   <div class="row justify-content-center">
     <div class="col-6 ">
-      <div class="form-floating">
-        <input #keywords class="form-control" id="floatingInput" placeholder="">
+      <div class="form-floating" >
+        <input #keywords class="form-control" value="land registry searches" id="floatingInput" placeholder="">
         <label for="floatingInput">Please enter keywords</label>
       </div>
-      <div class="justify-content-end">
-        <select  #searchEngine>
+      <div class="form-floating" style="margin: 20px 0px 20px 0px">
+        <input #url class="form-control" id="floatingInput" value="www.infotrack.co.uk" placeholder="">
+        <label for="floatingInput">Please enter desired URL</label>
+      </div>
+      <div class="justify-content-end"  >
+        <select #searchEngine>
           <option *ngFor="let se of searchEngines" [value]="se.id">
             {{se.title}}
           </option>
-</select>
+        </select>
       </div>
       <div class="text-center" *ngIf="isSearched" style="margin: 20px 0px 20px 0px ">
         <h3>
@@ -25,8 +29,8 @@
           </ng-template>
         </h3>
       </div>
-      
-      <button class="w-50 btn btn-lg btn-primary" style="margin: 10px" (click)="search( keywords.value,searchEngine.value )" type="submit">Search</button>
+
+      <button class="w-50 btn btn-lg btn-primary" style="margin: 10px" (click)="search(url.value, keywords.value,searchEngine.value )" type="submit">Search</button>
 
     </div>
   </div>

@@ -12,7 +12,7 @@ export class SearchComponent implements OnInit {
   constructor(private http: HttpClient) {
 
     this.fillSearchEngines();
-}
+  }
 
   ngOnInit(): void {
   }
@@ -37,40 +37,40 @@ export class SearchComponent implements OnInit {
         //alert(_response.result);
         console.log("this.searchEngines");
         console.log(this.searchEngines);
-        
-      
+
+
       }
     });
   }
 
   getSearchEngines() {
-    const resp = this.http.get<ResponseDto>(`${environment.AutoSearchApi}/SearchEngines`, );
+    const resp = this.http.get<ResponseDto>(`${environment.AutoSearchApi}/SearchEngines`,);
     console.log("resp");
     console.log(resp);
     return resp;
   }
-  search(text: string, searchEngineIndex:any) {
+  search(url: string, text: string, searchEngineIndex: any) {
     //console.log(`searchEngine`);
     console.log(searchEngineIndex);
-    
 
-    let res = this.getSearchResult(text, this.searchEngines[searchEngineIndex-1].id).subscribe((data: ResponseDto) => {
+
+    let res = this.getSearchResult(url, text, this.searchEngines[searchEngineIndex - 1].id).subscribe((data: ResponseDto) => {
       let _response: ResponseDto | undefined;
       _response = { ...data };
       console.log("this._response-1");
       console.log(_response);
-      
+
       if (_response.isSuccess) {
         //alert(_response.result);
-        this.isSearched =true;
+        this.isSearched = true;
         this.results = _response.result as any[];
       }
     });
   }
 
 
-  getSearchResult(text: string, searchEngineId: number) {
-    const params = new HttpParams().set('text', text).set('num', 100). set('searchEngineId', searchEngineId);
+  getSearchResult(url: string, text: string, searchEngineId: number) {
+    const params = new HttpParams().set('text', text).set('num', 100).set("desiredUrl", url).set('searchEngineId', searchEngineId);
     const resp = this.http.get<ResponseDto>(`${environment.AutoSearchApi}/Search`, { params });
     //console.log("resp");
     //console.log(resp);

@@ -18,14 +18,14 @@ namespace AutoSearch.Api.Search.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<ResponseDto> Search(string text, int num, int? searchEngineId)
+        public async Task<ResponseDto> Search(string text, int num, string desiredUrl, int? searchEngineId)
         {
             ResponseDto _response = new ResponseDto();
 
             try
             {
 
-                _response.Result = await GetSearchResultAsync(this._settings, text, num, searchEngineId);
+                _response.Result = await GetSearchResultAsync(this._settings, text, num, desiredUrl, searchEngineId);
 
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace AutoSearch.Api.Search.Controllers
         }
 
 
-        private async Task<List<int>> GetSearchResultAsync(ISearchSettings settings, string text, int num, int? searchEngineId)
+        private async Task<List<int>> GetSearchResultAsync(ISearchSettings settings, string text, int num,string desiredUrl, int? searchEngineId)
         {
             //"URL": "http://www.google.co.uk/search?num=[num]&q=[keywords]",
 
@@ -71,8 +71,10 @@ namespace AutoSearch.Api.Search.Controllers
 
             var resp = HttpUtility.HtmlDecode(await client.GetStringAsync(url));
             var links = Regex.Matches(resp, engine.Regex).Select(r => r.Value).ToList();
+            if (string.IsNullOrEmpty(desiredUrl))
+                desiredUrl = settings.DesiredUrl;
             var result = links == null ? new List<int>() :
-                links.Where(l => l.Contains(settings.DesiredUrl, StringComparison.OrdinalIgnoreCase))
+                links.Where(l => l.Contains(desiredUrl, StringComparison.OrdinalIgnoreCase))
                 .Select(l => links.IndexOf(l) + 1)
                 .Distinct()
                 .ToList();
