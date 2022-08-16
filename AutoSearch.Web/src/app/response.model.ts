@@ -4,3 +4,10 @@ export interface ResponseDto {
   displayMessage: string
   errorMessaages: [string]
 }
+
+export interface SearchEngine {
+  id: number,
+  title: string,
+  url: string,
+  regex: string
+}

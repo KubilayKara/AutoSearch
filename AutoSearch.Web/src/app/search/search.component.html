@@ -6,21 +6,27 @@
         <input #keywords class="form-control" id="floatingInput" placeholder="">
         <label for="floatingInput">Please enter keywords</label>
       </div>
-
-      <div class="text-center"  *ngIf="isSearched" style="margin: 20px 0px 20px 0px ">
+      <div class="justify-content-end">
+        <select  #searchEngine>
+          <option *ngFor="let se of searchEngines" [value]="se.id">
+            {{se.title}}
+          </option>
+</select>
+      </div>
+      <div class="text-center" *ngIf="isSearched" style="margin: 20px 0px 20px 0px ">
         <h3>
           Successfully searched for '{{keywords.value}}'!
-          
-            <p *ngIf="results.length > 0;else notFound">
-              Results position(s): <b>{{results}}</b>
-            </p>
-            <ng-template #notFound>
-              could not found in top 100 results.
-            </ng-template>
+
+          <p *ngIf="results.length > 0;else notFound">
+            Results position(s): <b>{{results}}</b>
+          </p>
+          <ng-template #notFound>
+            could not found in top 100 results.
+          </ng-template>
         </h3>
       </div>
-
-      <button class="w-50 btn btn-lg btn-primary" style="margin: 10px" (click)="search( keywords.value)" type="submit">Search</button>
+      
+      <button class="w-50 btn btn-lg btn-primary" style="margin: 10px" (click)="search( keywords.value,searchEngine.value )" type="submit">Search</button>
 
     </div>
   </div>

@@ -18,14 +18,14 @@ namespace AutoSearch.Api.Search.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<ResponseDto> Search(string text, int num)
+        public async Task<ResponseDto> Search(string text, int num, int? searchEngineId)
         {
             ResponseDto _response = new ResponseDto();
 
             try
             {
 
-                _response.Result = await GetSearchResultAsync(this._settings, text, num);
+                _response.Result = await GetSearchResultAsync(this._settings, text, num, searchEngineId);
 
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace AutoSearch.Api.Search.Controllers
 
 
         [HttpGet("SearchEngines")]
-        public async Task<ResponseDto> Search()
+        public async Task<ResponseDto> GetSearchEngines()
         {
             ResponseDto _response = new ResponseDto();
 
@@ -59,11 +59,12 @@ namespace AutoSearch.Api.Search.Controllers
         }
 
 
-        private async Task<List<int>> GetSearchResultAsync(ISearchSettings settings, string text, int num)
+        private async Task<List<int>> GetSearchResultAsync(ISearchSettings settings, string text, int num, int? searchEngineId)
         {
             //"URL": "http://www.google.co.uk/search?num=[num]&q=[keywords]",
 
-            var engine = settings.SearchEngines[0];
+            var engine = searchEngineId != null ? settings.SearchEngines.First(e => e.Id == searchEngineId.Value)
+                : settings.SearchEngines.First(e => e.IsDefault);
             var url = engine.Url.Replace("[keywords]", HttpUtility.UrlEncode(text)).Replace("[num]", num.ToString());
 
             using var client = new HttpClient();
@@ -72,7 +73,7 @@ namespace AutoSearch.Api.Search.Controllers
             var links = Regex.Matches(resp, engine.Regex).Select(r => r.Value).ToList();
             var result = links == null ? new List<int>() :
                 links.Where(l => l.Contains(settings.DesiredUrl, StringComparison.OrdinalIgnoreCase))
-                .Select(l => links.IndexOf(l)+1)
+                .Select(l => links.IndexOf(l) + 1)
                 .Distinct()
                 .ToList();
             return result;
