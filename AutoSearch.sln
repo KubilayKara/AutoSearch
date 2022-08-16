@@ -27,6 +27,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AutoSearch.Web", "AutoSearc
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "54362"
+		SlnRelativePath = "AutoSearch.Web\"
 	EndProjectSection
 EndProject
 Global
