@@ -11,9 +11,9 @@
         <h3>
           Successfully searched for '{{keywords.value}}'!
           
-            <div *ngIf="results.length > 0;else notFound">
+            <p *ngIf="results.length > 0;else notFound">
               Results position(s): <b>{{results}}</b>
-            </div>
+            </p>
             <ng-template #notFound>
               could not found in top 100 results.
             </ng-template>
