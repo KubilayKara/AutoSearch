@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Xpeprh9PVDwvQEC7m9otnlCgV0+sNJ2Ozv5vJevTkYY=",
+  "Source": "AutoSearch.Api.Search",
+  "BasePath": "_content/AutoSearch.Api.Search",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
