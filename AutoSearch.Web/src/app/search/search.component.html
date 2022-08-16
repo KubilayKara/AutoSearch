@@ -1,1 +1,15 @@
-<p>search works!</p>
+<main class="w-100 m-auto text-center">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-6 ">
+      <div class="form-floating">
+        <input #keywords class="form-control" id="floatingInput" placeholder="">
+        <label for="floatingInput">Please enter keywords</label>
+      </div>
+
+      <button class="w-50 btn btn-lg btn-primary" style="margin: 10px" (click)="search( keywords.value)" type="submit">Search</button>
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+</main>
