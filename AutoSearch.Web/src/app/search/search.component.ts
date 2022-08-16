@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import { ResponseDto } from '../response.model';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -37,9 +37,4 @@ export class SearchComponent implements OnInit {
   }
 }
 
-export interface ResponseDto {
-  isSuccess: boolean
-  result: {}
-  displayMessage: string
-  errorMessaages: [string]
-}
+
