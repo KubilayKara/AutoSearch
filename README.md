@@ -1,6 +1,6 @@
 <h1>This is an assignment project for InfoTrack<h1>
 
-![image](https://user-images.githubusercontent.com/22886122/184878695-7d464b21-827b-44d2-8e0c-e26022a85c35.png)
+![image](https://user-images.githubusercontent.com/22886122/185099796-c641a9e8-8c35-432e-ae30-9ab0ff3d90fc.png)
 
 
 
