@@ -69,6 +69,12 @@ namespace AutoSearch.Api.Search.Controllers
 
             using var client = new HttpClient();
 
+            if (engine.Url.ToLower().Contains("bing"))
+            {
+                client.DefaultRequestHeaders.Add("User-Agent",
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36");
+            }
+
             var resp = HttpUtility.HtmlDecode(await client.GetStringAsync(url));
             var links = Regex.Matches(resp, engine.Regex).Select(r => r.Value).ToList();
             if (string.IsNullOrEmpty(desiredUrl))
